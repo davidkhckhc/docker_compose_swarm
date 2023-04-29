@@ -1,0 +1,22 @@
+FROM centos:7
+
+LABEL maintainer="DV"
+LABEL version="1.0"
+LABEL description="DV Dockerfile"
+
+RUN yum -y update && yum -y install vim net-tools
+
+WORKDIR /DVFolder20230429
+
+ADD for_add /DVFolder20230429
+COPY for_cp /DVFolder20230429
+
+ENV IF_NAME=eth0 SSH_PORT=22
+
+VOLUME /DVFolder20230429
+
+EXPOSE $SSH_PORT
+
+CMD ["sh", "-c", "ifconfig $IF_NAME"]
+
+
