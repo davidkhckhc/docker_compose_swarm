@@ -1,0 +1,9 @@
+FROM python:3.8
+LABEL maintainer="DV"
+COPY requirement.txt /requirement/
+WORKDIR /requirement
+RUN pip install -i https://pypi.douban.com/simple/ -r requirement.txt
+COPY DV_requests.py /script/
+WORKDIR /script
+
+
