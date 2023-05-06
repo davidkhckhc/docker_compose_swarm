@@ -1,0 +1,37 @@
+version: '3'
+services:
+  qyt-nginx:
+#    image: "collinsctk/psql"
+    build: "/docker_compose_swarm/docker_1_Dockerfile_3_nginx_django_psql/nginx/"
+    networks:
+      - nginx
+      - django
+    ports:
+      - "80:80"
+    depends_on:
+      - "qyt-django"
+  qyt-django:
+#    image: "collinsctk/django"
+    build: "/docker_compose_swarm/docker_1_Dockerfile_3_nginx_django_psql/django/"
+    networks:
+      - django
+      - psql
+    depends_on:
+      - "qyt-psql"
+    restart: always
+  qyt-psql:
+    environment:
+      - POSTGRES_PASSWORD=Cisc0123
+    image: "postgres:11.18-alpine"
+    volumes:
+    - /docker_compose_swarm/docker_1_Dockerfile_3_nginx_django_psql/psql/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+    networks:
+      - psql
+
+networks:
+  nginx:
+    driver: bridge
+  django:
+    driver: bridge
+  psql:
+    driver: bridge
