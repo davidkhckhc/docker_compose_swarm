@@ -1,4 +1,7 @@
 FROM centos:8
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 RUN yum -y update && yum -y install gcc python3-devel && yum -y install python3 && yum -y install net-tools && yum -y install dos2unix
 LABEL maintainer="Qin Ke<collinsctk@qytang.com>"
 
