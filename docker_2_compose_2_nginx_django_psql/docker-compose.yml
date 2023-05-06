@@ -10,6 +10,7 @@ services:
       - "80:80"
     depends_on:
       - "qyt-django"
+    restart: always
   qyt-django:
 #    image: "collinsctk/django"
     build: "/docker_compose_swarm/docker_1_Dockerfile_3_nginx_django_psql/django/"
