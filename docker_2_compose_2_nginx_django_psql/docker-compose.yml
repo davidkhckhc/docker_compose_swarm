@@ -7,7 +7,7 @@ services:
       - nginx
       - django
     ports:
-      - "80:80"
+      - "8083:80"
     depends_on:
       - "qyt-django"
     restart: always
